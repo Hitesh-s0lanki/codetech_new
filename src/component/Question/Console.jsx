@@ -4,6 +4,7 @@ import {
   CircularProgress,
   Flex,
   Spacer,
+  Switch,
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -24,7 +25,7 @@ const obj = {
 
 const cookies = new Cookies();
 
-const Console = ({ question, code, language }) => {
+const Console = ({ question, code, language, api }) => {
   const [tabIndex, setTabIndex] = useState(0);
   const [progress, setProgess] = useState(false);
   const [loading, setLoading] = useState(false)
@@ -35,7 +36,7 @@ const Console = ({ question, code, language }) => {
 
   const { isUser } = useAuthContext()
 
-  const { RunCode, SubmitCode } = useCompilerContext();
+  const { RunCode, SubmitCode, RunUsingApi, SubmitUsingApi} = useCompilerContext();
 
   const [output, setOutput] = useState({ output1: "", output2: "", error: "" });
   const [showResult, setResult] = useState(false);
@@ -69,7 +70,8 @@ const Console = ({ question, code, language }) => {
     return value;
   };
 
-  const onRun = async () => {
+  const onRun = async (bool=true) => {
+    console.log(bool)
     setTabIndex(1);
     setResult(false);
     setProgess(true);
@@ -77,11 +79,17 @@ const Console = ({ question, code, language }) => {
     if (uid !== "" && isUser()) {
       try {
         const value = getValue(code.current.getValue());
-        const outputResponse = await RunCode({
-          uid,
-          value,
-          language: obj[language],
-        });
+        let outputResponse = [];
+        if(bool){
+           outputResponse = await RunCode({
+            uid,
+            value,
+            language: obj[language],
+          });
+        }else{
+           outputResponse = await RunUsingApi({uid,value,language:language.toLowerCase(),lang:obj[language]})
+        }
+
         if (outputResponse.length >= 2) {
           setOutput({
             output1: outputResponse[0],
@@ -111,13 +119,18 @@ const Console = ({ question, code, language }) => {
       })
   }
 
-  const onSubmit = async() =>{
+  const onSubmit = async(bool = true) =>{
     setLoading(true)
     const uid = cookies.get('auth')
     if(uid !== "" && isUser()){
       try{
         const value = getValue(code.current.getValue(), false)
-        const response = await SubmitCode({uid, value, language: obj[language], question})
+        let response = []
+        if(bool){
+          response = await SubmitCode({uid, value, language: obj[language], question})
+        } else {
+          response = await SubmitUsingApi({uid, value, language:language.toLowerCase() ,lang:obj[language], question})
+        }
         createToast('success',`You Score ${response}`)
       } catch(error) {
         createToast('error',error)
@@ -127,6 +140,8 @@ const Console = ({ question, code, language }) => {
     }
     setLoading(false)
   }
+
+  const [apiSwitch, setApiSwitch] = useState(true)
 
   return (
     <div className="mx-1 ">
@@ -153,20 +168,20 @@ const Console = ({ question, code, language }) => {
         </TabPanels>
       </Tabs>
       <Flex>
-        <Box p="4" className=" items-baseline">
-          <Text color="gray">Console</Text>
+        <Box p="4" className="flex items-center justify-center gap-2">
+          <Text color="gray">Console </Text><Switch size='md' onClick={() => setApiSwitch(!apiSwitch)} />
         </Box>
         <Spacer />
         <Box p="2">
           <div className="flex gap-2">
-            <Button colorScheme="gray" onClick={onRun}>
+            <Button colorScheme="gray" onClick={() => onRun(api)}>
               Run
             </Button>
             <Button
               isLoading={loading}
               loadingText='Submitting'
               colorScheme="whatsapp"
-              onClick={onSubmit}>Submit</Button>
+              onClick={() => onSubmit(api)}>Submit</Button>
           </div>
         </Box>
       </Flex>

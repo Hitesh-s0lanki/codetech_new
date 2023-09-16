@@ -58,7 +58,7 @@ const Question = () => {
           />
         </div>
         <div className="consoleWindow  border-2 rounded" style={{ background: "#fff" }}>
-          <Console question={question} code={editorRef} language={language}/>
+          <Console question={question} code={editorRef} language={language} />
         </div>
       </main>
     </div>
