@@ -12,6 +12,6 @@
             "Person table:\n+----------+----------+-----------+\n| personId | lastName | firstName |\n+----------+----------+-----------+\n| 1        | Wang     | Allen     |\n| 2        | Alice    | Bob       |\n+----------+----------+-----------+",
             "Address table:\n+-----------+----------+---------------+------------+\n| addressId | personId | city          | state      |\n+-----------+----------+---------------+------------+\n| 1         | 2        | New York City | New York   |\n| 2         | 3        | Leetcode      | California |\n+-----------+----------+---------------+------------+"
         ],
-        "answer":"1|Wang|Allen 2|Alice|Bob 1|2|New York City|New York 2|3|Leetcode|California "
+        "answer":"1|Wang|Allen\n2|Alice|Bob\n1|2|New York City|New York\n2|3|Leetcode|California"
     }
 ]
