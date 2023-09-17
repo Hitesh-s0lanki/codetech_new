@@ -21,7 +21,17 @@ function classNames(...classes) {
 export default function TopBar() {
 
     const navigate = useNavigate()
-    const { isUser, setUser} = useAuthContext()
+    const { isUser, setUser, getUser, getAuthUser} = useAuthContext()
+
+    const onHomeClick = async() =>{
+      try{
+        const uid = cookies.get('auth')
+        const user = await getAuthUser(uid)
+        await setUser(user.user)
+      } catch(err){
+        console.log(err)
+      }
+    }
 
     const handleLogout = async() =>{
       cookies.set('auth',"")
@@ -43,6 +53,7 @@ export default function TopBar() {
                   <div className="flex space-x-2">
                     {navigation.map((item) => (
                       <Link
+                        onClick={onHomeClick}
                         key={item.name}
                         to={item.to}
                         className={classNames(
@@ -58,8 +69,8 @@ export default function TopBar() {
                 </div>
               </div>
               {isUser() && (<div className=" flex items-center">
-                  <div className="Timer mx-1 d-flex justify-content-center align-items-center fw-bold" >Total Marks: </div>
-                  <Button className="btn mx-1" colorScheme='whatsapp'>{ 0}</Button>
+                  <div className="Timer mx-1 d-flex justify-content-center align-items-center fw-bold" >Total Score: </div>
+                  <Button className="btn mx-1" colorScheme='whatsapp'>{getUser().score}</Button>
                   <div className="vr"></div>
                   <Button className="btn mx-2" colorScheme='red' onClick={handleLogout}>
                     Logout

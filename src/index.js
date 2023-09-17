@@ -6,14 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthContext";
 import { ChakraProvider } from "@chakra-ui/react";
 import { CompilerProvider } from "./context/CompilerContext";
+import { SqlProvider } from "./context/SqlCompilerContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
     <CompilerProvider>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
+      <SqlProvider>
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
+      </SqlProvider>
     </CompilerProvider>
   </AuthProvider>
 );

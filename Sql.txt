@@ -4,13 +4,15 @@ CREATE TABLE Person(
 personId int,
 lastName Varchar(20),
 firstName Varchar(20));
-INSERT INTO department_new VALUES (1, 'Wang', 'Allen');
-INSERT INTO department_new VALUES (2, 'Alice', 'Bob');
+INSERT INTO Person VALUES (1, 'Wang', 'Allen');
+INSERT INTO Person VALUES (2, 'Alice', 'Bob');
 
 CREATE TABLE Address(
 addressId int,
 personId int,
 city Varchar(20),
 state Varchar(20));
-INSERT INTO department_new VALUES (1, 2, 'New York City', 'New York');
-INSERT INTO department_new VALUES (2, 3, 'Leetcode', 'California');
+INSERT INTO Address VALUES (1, 2, 'New York City', 'New York');
+INSERT INTO Address VALUES (2, 3, 'Leetcode', 'California');
+select * from Person;  
+select * from Address;  

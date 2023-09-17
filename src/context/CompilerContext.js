@@ -38,7 +38,7 @@ const CompilerProvider = ({ children }) => {
     }
   };
 
-  const SubmitCode = async ({ uid, value, language, question }) => {
+  const SubmitCode = async ({ uid, value, language, question , code}) => {
     const option = {
       method: "POST",
       headers: {
@@ -68,6 +68,17 @@ const CompilerProvider = ({ children }) => {
         if (userInfo.submitArray[+question.srno - 1] < output) {
           userInfo.score += output - userInfo.submitArray[+question.srno - 1];
           userInfo.submitArray[+question.srno - 1] = output;
+
+          //Add value to submit array
+          const submit = {
+            no:question.srno,
+            language:language,
+            question:question.title,
+            marks : output,
+            code:code,
+            time: Date.now()
+          }
+          userInfo.submission.push(submit)
         }
 
         await setDoc(doc(db, "codeTech", uid), userInfo);
@@ -118,7 +129,7 @@ const CompilerProvider = ({ children }) => {
     }
   };
 
-  const SubmitUsingApi = async ({ uid ,value, language, lang , question}) => {
+  const SubmitUsingApi = async ({ uid ,value, language, lang , question, code=""}) => {
     const url = "https://onecompiler-apis.p.rapidapi.com/api/v1/run";
     const options = {
       method: "POST",
@@ -157,6 +168,17 @@ const CompilerProvider = ({ children }) => {
           if (userInfo.submitArray[+question.srno - 1] < output) {
             userInfo.score += output - userInfo.submitArray[+question.srno - 1];
             userInfo.submitArray[+question.srno - 1] = output;
+
+            //Add value to submit array
+            const submit = {
+              no:question.srno,
+              language:language,
+              question:question.title,
+              marks : output,
+              code:code,
+              time: Date.now()
+            }
+            userInfo.submission.push(submit)
           }
   
           await setDoc(doc(db, "codeTech", uid), userInfo);

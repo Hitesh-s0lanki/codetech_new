@@ -6,6 +6,8 @@ import Home from "./component/Home";
 import { useAuthContext } from "./context/AuthContext";
 import TopBar from "./component/TopBar";
 import Question from "./component/Question";
+import Submitted from "./component/Submitted";
+import QuestionScreen from "./component/Sql/QuestionScreen";
 
 function App() {
   const {isUser} = useAuthContext()
@@ -18,6 +20,8 @@ function App() {
             <Route exact path="/SignUp" element={<SignUpPage />} />
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/question" element={<Question />} />
+            <Route exact path="/submit" element={<Submitted />} />
+            <Route exact path="/sql" element={<QuestionScreen />} />
           </Routes>
       </BrowserRouter>
     </main>

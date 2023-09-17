@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import problem from '../assets/question/question.json'
+import sql from '../assets/question/Sql.json'
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -66,6 +67,32 @@ const Problems = () => {
                 </tr>
               );
             })}
+            {sql.map((element, index) => {
+              return (
+                <tr
+                  key={element.question[0]}
+                  className="my-3"
+                  style={{ fontSize: "16px" }}
+                  onClick={() => navigate("/sql",{ state: element })}
+                >
+                  <td
+                    className="text-center"
+                    style={{ padding: "20px", fontSize: "20px" }}
+                  >
+                    {11 + index}
+                  </td>
+                  <td style={{ width: "500px" }}>{element.question[0]}</td>
+                  <td className="status">{"Not Solved"}</td>
+                  <td
+                    className="marks text-center mx-1"
+                    style={{ color: "green" }}
+                  >
+                    {10}
+                  </td>
+                </tr>
+              )
+            })
+            }
           </tbody>
         </table>
       </div>

@@ -21,7 +21,8 @@ const AuthProvider = ({ children }) => {
                 password:password,
                 score:0,
                 submitArray:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                status:false
+                status:true,
+                submission:[]
             }
 
             await setDoc(doc(db, 'codeTech', userCredential.user.uid),userInfo)
@@ -38,7 +39,18 @@ const AuthProvider = ({ children }) => {
             if (userInfo.exists()) {
                 return {user:userInfo.data(),error:"",bool:true,uid:userCredential.user.uid}
               } else {
-                return {user:"",error:"",bool:false}
+                const userInfo = {
+                    name:email.split("@")[0],
+                    email:email,
+                    password:password,
+                    score:0,
+                    submitArray:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    status:true,
+                    submission:[]
+                }
+    
+                await setDoc(doc(db, 'codeTech', userCredential.user.uid),userInfo)
+                return {user:userInfo,error:"",bool:true,uid:userCredential.user.uid};
               }
         } catch (error){
             return {user:"",error:error.message,bool:false}
@@ -51,7 +63,6 @@ const AuthProvider = ({ children }) => {
 
     const getAuthUser = async(uid) =>{
         try{
-            console.log("Getting User")
             const userInfo = await getDoc(doc(db, 'codeTech', uid))
             if (userInfo.exists()) {
                 return {user:userInfo.data(),error:""}
@@ -69,7 +80,29 @@ const AuthProvider = ({ children }) => {
         return true
     }
 
-    return <AuthContext.Provider value={{createUserAuthentication, setUser, getUser, isUser, authenticateUser, getAuthUser}}>{children}</AuthContext.Provider>
+    const getSubmittedCode = async(uid, question) =>{
+        try{
+            const userInfo = await getDoc(doc(db, 'codeTech', uid))
+            if (userInfo.exists()) {
+                let ans = []
+                const arr = userInfo.data().submission
+                arr.forEach((element) => {
+                    if(element.no === question){
+                        ans.push(element)
+                    }
+                });
+
+                return ans
+
+              } else {
+                throw new Error('User Not exist')
+              }
+        } catch(error) {
+            throw new Error(`Error while getting : ${error}`)
+        }       
+    }
+
+    return <AuthContext.Provider value={{createUserAuthentication, setUser, getUser, isUser, authenticateUser, getAuthUser, getSubmittedCode}}>{children}</AuthContext.Provider>
 }
 
 // Custom Hook

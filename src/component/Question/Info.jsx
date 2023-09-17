@@ -1,9 +1,33 @@
-import React  from "react";
+import React, { useState }  from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { useAuthContext } from "../../context/AuthContext";
+import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
+
+const cookies = new Cookies()
+
 const Info = (props) => {
+  const navigate = useNavigate()
+  const [tabIndex, setTabIndex] = useState(0);
+  const [submittedCode, setSubmit] = useState([])
+
+  const { getSubmittedCode } = useAuthContext()
+  const handleTabsChange = async(index) => {
+    setTabIndex(index);
+    if(index === 1){
+      try{
+        const uid = cookies.get('auth')
+        const getSubmit = await getSubmittedCode(uid, props.info.srno)
+        setSubmit(getSubmit)
+      }catch(error){
+        console.log(error)
+      }
+    }
+  };
+
   return (
     <div className=" h-3/4 overflow-auto bg-white border-2 rounded w-1/3">
-      <Tabs colorScheme="gray">
+      <Tabs colorScheme="gray" index={tabIndex} onChange={handleTabsChange}>
       <TabList>
         <Tab fontSize={17}>Description</Tab>
         <Tab fontSize={17}>Submission</Tab>
@@ -74,25 +98,24 @@ const Info = (props) => {
                     <th className="w-20px">
                       <div className="form-check mb-0 text-center">Srno.</div>
                     </th>
-                    <th className="text-center">Title</th>
+                    <th>Language</th>
                     <th>YourScore</th>
                   </tr>
                 </thead>
 
                 <tbody className="list">
-                  {/* {submittedCase.map((element)=>{
+                  { submittedCode.map((element, index)=>{
                     return (
-                    <tr className="my-3" style={{ fontSize: "16px" }}>
+                    <tr className="my-3" style={{ fontSize: "16px" }} onClick={()=>navigate("/submit", { state: element })}>
                       <td
                         className="text-center"
-                        style={{ padding: "20px", fontSize: "20px" }}
-                      >{element.srno}
+                      >{index + 1}
                       </td>
-                      <td style={{ width: "500px" }}>{element.title}</td>
+                      <td className="p-2" style={{ width: "500px" }}>{element.language.toUpperCase()}</td>
                       <td className="status">{element.marks}</td>
                     </tr>
                     )
-                })} */}
+                })}
                 </tbody>
               </table>
             </div>

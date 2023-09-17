@@ -21,11 +21,12 @@ const obj = {
   Cpp: "cpp",
   Javascript: "js",
   Python: "py",
+  Java:"java"
 };
 
 const cookies = new Cookies();
 
-const Console = ({ question, code, language, api }) => {
+const Console = ({ question, code, language }) => {
   const [tabIndex, setTabIndex] = useState(0);
   const [progress, setProgess] = useState(false);
   const [loading, setLoading] = useState(false)
@@ -45,6 +46,8 @@ const Console = ({ question, code, language, api }) => {
 
   const getValue = (code, bool=true) => {
     let value = "";
+    const uid = cookies.get('auth')
+    const header = `public class ${uid} {\n    public static void main(String[] args) {`
     if(bool){
       if (language === "Cpp") {
         value = question.CppHeader + code + question.CppMain;
@@ -54,6 +57,8 @@ const Console = ({ question, code, language, api }) => {
         value = code + "\n" + question.JavascriptMain;
       } else if (language === "Python") {
         value = code + question.PythonMain;
+      } else if(language === "Java"){
+        value = header + "\n" + code + "\n" + question.JavaMain;
       }
     }else{
       if (language === "Cpp") {
@@ -127,9 +132,9 @@ const Console = ({ question, code, language, api }) => {
         const value = getValue(code.current.getValue(), false)
         let response = []
         if(bool){
-          response = await SubmitCode({uid, value, language: obj[language], question})
+          response = await SubmitCode({uid, value, language: obj[language], question,code:code.current.getValue()})
         } else {
-          response = await SubmitUsingApi({uid, value, language:language.toLowerCase() ,lang:obj[language], question})
+          response = await SubmitUsingApi({uid, value, language:language.toLowerCase() ,lang:obj[language], question ,code:code.current.getValue() })
         }
         createToast('success',`You Score ${response}`)
       } catch(error) {
@@ -169,19 +174,20 @@ const Console = ({ question, code, language, api }) => {
       </Tabs>
       <Flex>
         <Box p="4" className="flex items-center justify-center gap-2">
-          <Text color="gray">Console </Text><Switch size='md' onClick={() => setApiSwitch(!apiSwitch)} />
+          <Text color="gray" className=" cursor-pointer" onClick={() => setApiSwitch(!apiSwitch) }>Console </Text>
+          <Switch size='md' isChecked={apiSwitch} isDisabled/>
         </Box>
         <Spacer />
         <Box p="2">
           <div className="flex gap-2">
-            <Button colorScheme="gray" onClick={() => onRun(api)}>
+            <Button colorScheme="gray" onClick={() => onRun(apiSwitch)}>
               Run
             </Button>
             <Button
               isLoading={loading}
               loadingText='Submitting'
               colorScheme="whatsapp"
-              onClick={() => onSubmit(api)}>Submit</Button>
+              onClick={() => onSubmit(apiSwitch)}>Submit</Button>
           </div>
         </Box>
       </Flex>
