@@ -58,7 +58,7 @@ const Console = ({ question, code, language }) => {
       } else if (language === "Python") {
         value = code + question.PythonMain;
       } else if(language === "Java"){
-        value = header + "\n" + code + "\n" + question.JavaMain;
+        value = question.JavaHeader + "\n" + header + "\n" + code + "\n" + question.JavaMain;
       }
     }else{
       if (language === "Cpp") {
@@ -69,6 +69,8 @@ const Console = ({ question, code, language }) => {
         value = code + "\n" + question.JavascriptSubmit;
       } else if (language === "Python") {
         value = code + question.PythonSubmit;
+      } else if(language === "Java"){
+        value = question.JavaHeader + "\n" + header + "\n" + code + "\n" + question.JavaSubmit;
       }
     }
 
@@ -156,11 +158,11 @@ const Console = ({ question, code, language }) => {
           <Tab>Result</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel height={145} className="overflow-auto">
+          <TabPanel height={180} className="overflow-auto">
             <Case info={question} />
           </TabPanel>
           <TabPanel
-            height={145}
+            height={180}
             className={`overflow-auto ${
               progress ? "flex items-center justify-center" : ""
             }`}

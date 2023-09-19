@@ -65,7 +65,7 @@ const CompilerProvider = ({ children }) => {
       if (userInfo.exists()) {
         userInfo = userInfo.data();
 
-        if (userInfo.submitArray[+question.srno - 1] < output) {
+        if (userInfo.submitArray[+question.srno - 1] <= output) {
           userInfo.score += output - userInfo.submitArray[+question.srno - 1];
           userInfo.submitArray[+question.srno - 1] = output;
 
@@ -165,7 +165,7 @@ const CompilerProvider = ({ children }) => {
         if (userInfo.exists()) {
           userInfo = userInfo.data();
   
-          if (userInfo.submitArray[+question.srno - 1] < output) {
+          if (userInfo.submitArray[+question.srno - 1] <= output) {
             userInfo.score += output - userInfo.submitArray[+question.srno - 1];
             userInfo.submitArray[+question.srno - 1] = output;
 
