@@ -158,11 +158,11 @@ const Console = ({ question, code, language }) => {
           <Tab>Result</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel height={180} className="overflow-auto">
+          <TabPanel height={160} className="overflow-auto">
             <Case info={question} />
           </TabPanel>
           <TabPanel
-            height={180}
+          height={160}
             className={`overflow-auto ${
               progress ? "flex items-center justify-center" : ""
             }`}
@@ -174,13 +174,13 @@ const Console = ({ question, code, language }) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Flex>
-        <Box p="4" className="flex items-center justify-center gap-2">
+      <Flex height={100} className="flex items-center justify-between">
+        <Box p="2" className="flex items-center justify-center gap-2">
           <Text color="gray" className=" cursor-pointer" onClick={() => setApiSwitch(!apiSwitch) }>Console </Text>
           <Switch size='md' isChecked={apiSwitch} isDisabled/>
         </Box>
         <Spacer />
-        <Box p="2">
+        <Box p="1">
           <div className="flex gap-2">
             <Button colorScheme="gray" onClick={() => onRun(apiSwitch)}>
               Run

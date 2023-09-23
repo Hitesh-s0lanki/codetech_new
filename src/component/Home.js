@@ -24,8 +24,8 @@ const Home = () => {
 
     if(cookies.get('auth')){
         return (
-          <div className=''>
-              <main className='container'>
+          <div className='h-full'>
+              <main className='container h-full'>
               <Grid gap={4} templateColumns='repeat(4, 1fr)'>
                   <GridItem colSpan={3}><Problems /></GridItem>
                   <GridItem ><Profile name={profile.name} score={profile.score} /></GridItem>

@@ -20,10 +20,10 @@ const Question = () => {
   }
 
   return (
-    <div className="flex gap-1 m-1 " style={{height:"950px"}}>
+    <div className="flex gap-1 m-1 " style={{height:"720px"}}>
       <Info info={question} />
       <main className="flex flex-col gap-1 w-2/3">
-        <div className="editor p-2 border-2 rounded overflow-auto w-full h-1/2">
+        <div className="editor p-2 border-2 rounded w-full h-3/5">
           <div className="upperMenu flex justify-between p-2 m-1 ">
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -43,6 +43,7 @@ const Question = () => {
             </Menu>
           </div>
           <Editor
+          height={330}
             language={language.toLowerCase()}
             value={question[language]} 
             onMount={handleEditorDidMount}
@@ -56,7 +57,7 @@ const Question = () => {
             }}
           />
         </div>
-        <div className="consoleWindow  border-2 rounded " style={{ background: "#fff" }}>
+        <div className="consoleWindow  border-2 rounded h-2/5" style={{ background: "#fff" }}>
           <Console question={question} code={editorRef} language={language} />
         </div>
       </main>

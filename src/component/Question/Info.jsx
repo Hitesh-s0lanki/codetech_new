@@ -33,7 +33,7 @@ const Info = (props) => {
   };
 
   return (
-    <div className=" h-3/4 overflow-auto bg-white border-2 rounded w-1/3">
+    <div className="h-full overflow-auto bg-white border-2 rounded w-1/3">
       <Tabs colorScheme="gray" index={tabIndex} onChange={handleTabsChange}>
         <TabList>
           <Tab fontSize={17}>Description</Tab>
@@ -41,7 +41,7 @@ const Info = (props) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <div className="p-1">
+            <div className="p-1 h-full">
               <div
                 className="Title d-flex my-2 fw-bold"
                 style={{ fontSize: "20px" }}
@@ -107,7 +107,7 @@ const Info = (props) => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="p-1">
+            <div className="p-1 h-full">
               <div className="card border-1 flex-fill w-90" id="users">
                 <div className="card-header border-0 card-header-space-between">
                   <h2 className="card-header-title h5">Details</h2>

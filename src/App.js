@@ -12,7 +12,7 @@ import QuestionScreen from "./component/Sql/QuestionScreen";
 function App() {
   const {isUser} = useAuthContext()
   return (
-    <main className={isUser ? "bg-white" : "bg-secondary-subtle"} style={{ height: "100vh" }}>
+    <main className={`${isUser ? "bg-white" : "bg-secondary-subtle"} + " h-full"`}>
       <BrowserRouter>
           <TopBar />
           <Routes>
