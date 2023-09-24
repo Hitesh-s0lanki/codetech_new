@@ -8,6 +8,7 @@ import TopBar from "./component/TopBar";
 import Question from "./component/Question";
 import Submitted from "./component/Submitted";
 import QuestionScreen from "./component/Sql/QuestionScreen";
+import Score from "./component/Score";
 
 function App() {
   const {isUser} = useAuthContext()
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/question" element={<Question />} />
             <Route exact path="/submit" element={<Submitted />} />
             <Route exact path="/sql" element={<QuestionScreen />} />
+            <Route exact path="/score" element={<Score />} />
           </Routes>
       </BrowserRouter>
     </main>

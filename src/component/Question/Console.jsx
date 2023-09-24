@@ -35,7 +35,7 @@ const Console = ({ question, code, language }) => {
     setTabIndex(index);
   };
 
-  const { isUser } = useAuthContext()
+  const { isUser, getAuthUser,setUser  } = useAuthContext()
 
   const { RunCode, SubmitCode, RunUsingApi, SubmitUsingApi} = useCompilerContext();
 
@@ -139,6 +139,8 @@ const Console = ({ question, code, language }) => {
           response = await SubmitUsingApi({uid, value, language:language.toLowerCase() ,lang:obj[language], question ,code:code.current.getValue() })
         }
         createToast('success',`You Score ${response}`)
+        const user = await getAuthUser(cookies.get("auth"));
+        await setUser(user.user);
       } catch(error) {
         createToast('error',error)
       }

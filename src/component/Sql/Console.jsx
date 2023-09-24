@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text, Button, CircularProgress } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text, Button, CircularProgress, useToast } from '@chakra-ui/react'
 import Result from "./Result";
 import { useSQLContext } from "../../context/SqlCompilerContext";
 import Cookies from "universal-cookie";
+import { useAuthContext } from "../../context/AuthContext";
 
 const cookies = new Cookies()
 
 const Console = ({ code, question }) => {
+
+    const toast = useToast()
+
+    const createToast = (status, message) =>{
+      toast({
+        position:'top',
+          title: `${message}`,
+          status: status,
+          isClosable: true,
+        })
+    }
 
     const [progress, setProgess] = useState(false);
     const { runSqlCommand } = useSQLContext()
@@ -20,7 +32,7 @@ const Console = ({ code, question }) => {
         setProgess(true)
         try{
             const uid = cookies.get('auth')
-            const output = await runSqlCommand({uid,code: code.current.getValue()})
+            const output = await runSqlCommand({uid,code: question.advance + code.current.getValue(), question})
             if(!output.error){
                 setOutput(output.output)
                 if(output.ans === question.answer){
@@ -40,6 +52,19 @@ const Console = ({ code, question }) => {
         showResult(true)
     }
 
+    const { setUser, getAuthUser } = useAuthContext();
+
+    const onSubmit = async() =>{
+      try{
+        const uid = cookies.get('auth')
+        const output = await runSqlCommand({uid,code: question.advance + code.current.getValue(), question,bool:true})
+        createToast('success',`You Score ${output.marks}`)
+        const user = await getAuthUser(cookies.get("auth"));
+        await setUser(user.user);
+      }catch(error){
+        createToast('error',`Error while Submitting ${error}`)
+      }
+    }
   return (
     <div className="border-1 rounded">
       <Tabs size="md" variant="enclosed">
@@ -60,7 +85,7 @@ const Console = ({ code, question }) => {
             <Text>Console</Text>
             <main className="flex gap-2">
                 <Button colorScheme="gray" onClick={onRun}>Run</Button>
-                <Button colorScheme="green" isDisabled={status !== "Accepted" }>Submit</Button>
+                <Button colorScheme="green" isDisabled={status !== "Accepted" } onClick={onSubmit}>Submit</Button>
             </main>
         </Box>
       </Tabs>

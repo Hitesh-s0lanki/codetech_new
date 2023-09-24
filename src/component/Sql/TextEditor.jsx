@@ -16,7 +16,7 @@ const TextEditor = ({ onValue }) => {
               fontSize: "16px",
               formatOnType: true,
               autoClosingBrackets: true,
-              minimap: { scale: 15 },
+              minimap: { scale: 0 },
         }}
         />
     </div>

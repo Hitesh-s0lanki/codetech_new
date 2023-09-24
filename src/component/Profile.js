@@ -49,7 +49,7 @@ const Profile = (props) => {
       <CardBody>
         <Text fontSize='lg' >Your Complete Score</Text>
         <div className="container m-5" style={{height:"200px",width:"200px"}}>
-            <CircularProgressbar value={props.score} text={`${props.score}/100`}/>
+            <CircularProgressbar value={(props.score/150)*100}  text={`${props.score}/150`}/>
         </div>
       </CardBody>
       <CardFooter>

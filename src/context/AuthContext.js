@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
                 email:email,
                 password:password,
                 score:0,
-                submitArray:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                submitArray:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 status:true,
                 submission:[]
             }
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
                     email:email,
                     password:password,
                     score:0,
-                    submitArray:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    submitArray:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     status:true,
                     submission:[]
                 }

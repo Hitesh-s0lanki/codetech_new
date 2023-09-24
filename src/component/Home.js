@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Problems from './Problems';
 import { Grid, GridItem } from '@chakra-ui/react';
 import Profile from './Profile';
+import Instruction from './Instruction';
 
 const cookies = new Cookies()
 
@@ -28,7 +29,10 @@ const Home = () => {
               <main className='container h-full'>
               <Grid gap={4} templateColumns='repeat(4, 1fr)'>
                   <GridItem colSpan={3}><Problems /></GridItem>
-                  <GridItem ><Profile name={profile.name} score={profile.score} /></GridItem>
+                  <GridItem >
+                    <Profile name={profile.name} score={profile.score} />
+                    <Instruction />
+                </GridItem>
               </Grid>
               </main>
           </div>

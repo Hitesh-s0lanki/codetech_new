@@ -70,7 +70,7 @@ const Problems = () => {
             {sql.map((element, index) => {
               return (
                 <tr
-                  key={element.question[0]}
+                  key={element.title}
                   className="my-3"
                   style={{ fontSize: "16px" }}
                   onClick={() => navigate("/sql",{ state: element })}
@@ -81,14 +81,20 @@ const Problems = () => {
                   >
                     {11 + index}
                   </td>
-                  <td style={{ width: "500px" }}>{element.question[0]}</td>
-                  <td className="status">{"Not Solved"}</td>
+                  <td style={{ width: "500px" }}>{element.title}</td>
+                  <td className="status">{marks[10 + index] === 0 ? 'Not Solved' : 'Solved'}</td>
                   <td
                     className="marks text-center mx-1"
                     style={{ color: "green" }}
                   >
                     {10}
                   </td>
+                  {isUser() && <td
+                    className="marks text-center mx-1"
+                    style={{ color: "red" }}
+                  >
+                    {marks[10 + index]}
+                  </td>}
                 </tr>
               )
             })

@@ -4,6 +4,7 @@ import { Button } from '@chakra-ui/react'
 
 import { useAuthContext } from '../context/AuthContext'
 import Cookies from 'universal-cookie'
+import Timer from './Timer'
 
 const cookies = new Cookies()
 
@@ -75,6 +76,7 @@ export default function TopBar() {
                   <Button className="btn mx-2" colorScheme='red' onClick={handleLogout}>
                     Logout
                   </Button>
+                  <Timer />
               </div>)}
             </div>
           </div>
