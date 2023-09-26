@@ -39,6 +39,7 @@ const AuthProvider = ({ children }) => {
             if (userInfo.exists()) {
                 return {user:userInfo.data(),error:"",bool:true,uid:userCredential.user.uid}
               } else {
+                const getName = await getDoc(doc(db, 'logical', userCredential.user.uid))
                 const userInfo = {
                     name:email.split("@")[0],
                     email:email,
@@ -49,6 +50,9 @@ const AuthProvider = ({ children }) => {
                     submission:[]
                 }
     
+                if(getName.exists()){
+                    userInfo.name = getName.data().name1
+                }
                 await setDoc(doc(db, 'codeTech', userCredential.user.uid),userInfo)
                 return {user:userInfo,error:"",bool:true,uid:userCredential.user.uid};
               }

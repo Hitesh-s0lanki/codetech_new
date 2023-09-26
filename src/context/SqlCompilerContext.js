@@ -8,13 +8,15 @@ const SqlContext = createContext();
 
 const SqlProvider = ({ children }) => {
   const runSqlCommand = async ({ uid, code , question ,bool = false}) => {
-    const url = "https://sql-code-compiler.p.rapidapi.com/";
+
+    const url = 'https://sql-code-compiler.p.rapidapi.com/';
+
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "db68717ecemsh7537959e53f1ff2p115a3ajsn122cf34378f5",
-        "X-RapidAPI-Host": "sql-code-compiler.p.rapidapi.com",
+        'X-RapidAPI-Key': '77e7f44330mshb5bccf2b84c1782p1fb1efjsne98b35de514f',
+		    'X-RapidAPI-Host': 'sql-code-compiler.p.rapidapi.com',
       },
       body: JSON.stringify({
         code: code,

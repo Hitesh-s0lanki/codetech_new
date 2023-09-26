@@ -7,7 +7,11 @@ import {
     Heading,
   } from "@chakra-ui/react";
   import React from "react";
+
   
+  const rules = [
+    
+  ]
   const Instruction = () => {
     return (
       <Card className="my-3 flex items-start justify-start drop-shadow-2xl">
