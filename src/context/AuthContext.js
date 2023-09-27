@@ -52,6 +52,11 @@ const AuthProvider = ({ children }) => {
     
                 if(getName.exists()){
                     userInfo.name = getName.data().name1
+                }else{
+                    const getName = await getDoc(doc(db, 'round2', userCredential.user.uid))
+                    if(getName.exists()){
+                        userInfo.name = getName.data().name1
+                    }
                 }
                 await setDoc(doc(db, 'codeTech', userCredential.user.uid),userInfo)
                 return {user:userInfo,error:"",bool:true,uid:userCredential.user.uid};
