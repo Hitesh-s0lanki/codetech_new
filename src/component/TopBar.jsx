@@ -76,7 +76,7 @@ export default function TopBar() {
                   <Button className="btn mx-2" colorScheme='red' onClick={handleLogout}>
                     Logout
                   </Button>
-                  <Timer />
+                  {/* <Timer /> */}
               </div>)}
             </div>
           </div>

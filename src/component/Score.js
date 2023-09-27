@@ -9,7 +9,7 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase-config";
 
 const Score = () => {
@@ -17,7 +17,7 @@ const Score = () => {
 
   useEffect(() => {
     const getAllScore = async () => {
-      const query1 = query(collection(db, "codeTech"), orderBy("score", "desc"), limit(5));
+      const query1 = query(collection(db, "codeTech"), orderBy("score", "desc"));
       let ans = [];
 
       try {
