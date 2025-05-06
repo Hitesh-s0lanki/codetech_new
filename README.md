@@ -56,7 +56,7 @@ It’s an ideal platform to:
 ![Auth Page](images/auth.png)
 ![Problem List](images/problems.png)
 ![Problem ](images/problem.png)
-![Result Output](images/scoret.png)
+![Result Output](images/score.png)
 
 ---
 
