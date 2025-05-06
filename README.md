@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+# 💻 Codetech – Competitive Coding Practice Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Codetech](https://codetech-new.vercel.app/) is an interactive platform designed for competitive programmers and developers to solve coding challenges in a LeetCode-style environment. It supports real-time code editing, problem listings, and backend code execution for instant feedback.
 
-## Available Scripts
+🔗 **Live Site:** [https://codetech-new.vercel.app](https://codetech-new.vercel.app)
+📦 **GitHub Repo:** [https://github.com/Hitesh-s0lanki/codetech_new](https://github.com/Hitesh-s0lanki/codetech_new)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 What is Codetech?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> Codetech is built for aspiring programmers and students preparing for coding interviews and competitive exams. It simulates a real online judge with code editor, test case evaluation, and problem solving history.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+It’s an ideal platform to:
 
-### `npm test`
+- Practice algorithmic problems
+- Test code across multiple languages
+- Prepare for interviews
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🧠 Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 📋 **Problem Listings** – Browse and choose from a set of algorithmic challenges.
+- 🧑‍💻 **Code Editor** – Write code with syntax highlighting and basic autocompletion.
+- ⚙️ **Code Execution** – Compile and run code with test inputs via server-side compiler function.
+- 🔐 **Authentication & User Tracking** – Managed via Firebase.
+- 🧾 **Submission History** – Track what you’ve solved (coming soon).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ Tech Stack
 
-### `npm run eject`
+**Frontend:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React.js
+- Context API for state management
+- Tailwind CSS (if used for styling)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Backend:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Firebase (Authentication + Firestore)
+- Node.js (API + code execution backend)
+- Custom compiler logic for real-time code evaluation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Hosting:**
 
-## Learn More
+- Vercel
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📸 Screenshots
 
-### Code Splitting
+> Add screenshots like:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Auth Page](images/auth.png)
+![Problem List](images/problems.png)
+![Problem ](images/problem.png)
+![Result Output](images/scoret.png)
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🧰 Getting Started
 
-### Making a Progressive Web App
+### 1. Clone the Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+git clone https://github.com/Hitesh-s0lanki/codetech_new.git
+cd codetech_new
+```
 
-### Advanced Configuration
+### 2. Install Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm install
+```
 
-### Deployment
+### 3. Set Up Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Create a `.env.local` file and add Firebase keys and backend URL:
 
-### `npm run build` fails to minify
+```env
+REACT_APP_FIREBASE_API_KEY=your_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=sender_id
+REACT_APP_FIREBASE_APP_ID=app_id
+REACT_APP_COMPILER_API_URL=http://your-backend-url/execute
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 4. Start the App
+
+```bash
+npm start
+```
+
+---
+
+## 🔧 Code Execution Engine
+
+Codetech uses a secure Node.js server to compile and run user-submitted code.
+
+Sample flow:
+
+- User writes code in the frontend
+- Code is sent to a backend API
+- Server runs the code inside a secure container (like Docker or isolated sandbox)
+- Returns output or error logs
+
+> You can extend this with support for C++, Python, Java, etc.
+
+---
+
+## 🔮 Future Roadmap
+
+- 💬 Discussion section for each problem
+- 🧪 Unit test support for more robust evaluations
+- 📈 User profile and ranking system
+- 🧠 AI code hints (powered by OpenAI)
+- 📱 Mobile-friendly UI
+
+---
+
+## 🤝 Contributing
+
+Feel free to fork, raise issues, or contribute pull requests! All improvements—UI, backend, security, or compiler optimization—are welcome.
+
+---
